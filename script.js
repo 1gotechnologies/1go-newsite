@@ -58,3 +58,15 @@ closeBtn.addEventListener("click", () => {
     dropBtn.classList.remove("hidden")
     closeBtn.classList.add("hidden")
 })
+
+//to toggle password visibility!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function togglePsw() {
+    let passwordInput = document.querySelectorAll(".pass-input");
+    passwordInput.forEach((item, index) => {
+        if (item.type === "password") {
+            item.type = "text";
+        } else {
+            item.type = "password";
+        }
+    })
+  } 
