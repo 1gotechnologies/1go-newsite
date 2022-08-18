@@ -6,7 +6,9 @@ module.exports = {
     "./public/privacy.html",
     "./public/terms&conditions.html",
     "./public/login.html",
-    "./public/register.html"
+    "./public/register.html",
+    "./public/contact.html",
+    "./public/about.html"
   ],
   theme: {
     extend: {
