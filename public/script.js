@@ -2,16 +2,11 @@ AOS.init();
 
 //to flip in on page load
 const blurBox = document.getElementById("blur--box");
-const skyBox = document.getElementById("sky--box");
+blurBox.classList.remove("hidden");
 
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        blurBox.classList.remove("hidden")
-    } , 2000);
-    setTimeout(() => {
-        skyBox.classList.remove("hidden")
-    } , 3500);
-})
+/*window.addEventListener("load", () => {
+    blurBox.classList.remove("hidden")
+})*/
 
 //the FAQ section controll
 let questCont = document.querySelectorAll(".quest-cont");
