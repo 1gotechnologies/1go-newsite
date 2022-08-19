@@ -1293,6 +1293,21 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.px-\[100\%\] {
+  padding-left: 100%;
+  padding-right: 100%;
+}
+
+.px-\[50\%\] {
+  padding-left: 50%;
+  padding-right: 50%;
+}
+
+.px-\[40\%\] {
+  padding-left: 40%;
+  padding-right: 40%;
+}
+
 .pt-\[60px\] {
   padding-top: 60px;
 }
@@ -1782,6 +1797,10 @@ video {
     width: 400px;
   }
 
+  .md\:w-\[280px\] {
+    width: 280px;
+  }
+
   .md\:p-\[20px\] {
     padding: 20px;
   }
@@ -1973,6 +1992,11 @@ video {
     padding-bottom: 20px;
   }
 
+  .lg\:py-\[50px\] {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
   .lg\:pt-\[70px\] {
     padding-top: 70px;
   }
@@ -2011,6 +2035,14 @@ video {
 
   .lg\:text-\[20px\] {
     font-size: 20px;
+  }
+
+  .lg\:text-\[250px\] {
+    font-size: 250px;
+  }
+
+  .lg\:text-\[25px\] {
+    font-size: 25px;
   }
 
   .lg\:font-\[600\] {

@@ -2,7 +2,9 @@ AOS.init();
 
 //to flip in on page load
 const blurBox = document.getElementById("blur--box");
-blurBox.classList.remove("hidden");
+function box() {
+    blurBox.classList.remove("hidden")
+}
 
 /*window.addEventListener("load", () => {
     blurBox.classList.remove("hidden")
