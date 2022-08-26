@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Account from "../pages/Account";
-import Approved from "../pages/Approved";
-import Declined from "../pages/Declined";
 import ListPage from "../pages/ListPage";
 import DetailsPage from "../pages/DetailsPage";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import Paid from "../pages/Paid";
-import Pending from "../pages/Pending";
 import Register from "../pages/Register";
 import SummaryPage from "../pages/SummaryPage";
 
