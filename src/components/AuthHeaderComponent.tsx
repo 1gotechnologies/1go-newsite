@@ -24,7 +24,7 @@ const HeaderComponent = () => {
           to="/"
         >
           <div className="pl-2 md:pl-0 flex gap-2 justify-between items-end md:items-center">
-            <img src="logo.png" className="w-[35px] h-auto" />
+            <img src="/logo.png" className="w-[35px] h-auto" />
             <h1>explore</h1>
           </div>
         </NavLink>

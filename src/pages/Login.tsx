@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { Btn, Input } from "../components/Styled";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import MainLayout from "../layout/MainLayout";
+import { checkEmail, checkPassword } from "../utils/formValidation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
 
+  // password should be atleast 8 character long, 1 uppercase, 1 lowercase, 1 number
   const login: FormEventHandler = async (e) => {
     e.preventDefault();
     console.log("login");
@@ -24,24 +26,40 @@ export default function Login() {
           <h4 className="text-[32px] md:text-3xl lg:text-4xl md:font-bold">
             Login
           </h4>
-          <div className="hidden md:flex gap-2 items-center">
-            <img src="logo.png" className="w-[40px] h-auto" />
-            <h1 className="hidden md:block text-3xl font-[400]">
-              explore Admin
-            </h1>
-          </div>
         </div>
         <div className="grow w-full md:w-[50%] lg:w-[60%] min-h-[50%] flex md:border-[#ccc] border-0 md:border-l-2 md:pl-10 container flex-col justify-between gap-5 md:py-5">
-          <Input
-            className="my-3 focus:!border-b-[#1F66D0] text-lg"
-            type={"email"}
-            placeholder="Email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <div className="flex items-center">
+          {/* email */}
+          <div className="my-3 flex flex-wrap">
+            <Input
+              className={
+                "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8 " +
+                  email.length && !checkEmail(email)
+                  ? " focus:!border-b-[red] "
+                  : ""
+              }
+              type={"email"}
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+
+            {!checkEmail(email) && (
+              <small
+                className={
+                  !email.length
+                    ? "hidden "
+                    : "" +
+                      " w-full text-[red] capitalize text-right leading-none"
+                }
+              >
+                invalid email format
+              </small>
+            )}
+          </div>
+          {/* password */}
+          <div className="flex items-center flex-wrap">
             <Input
               className="my-3 focus:!border-b-[#1F66D0] text-lg !pr-8"
               type={!showPwd ? "password" : ""}
@@ -59,6 +77,20 @@ export default function Login() {
               {!showPwd && <VscEye size={"24px"} className="opacity-50" />}
               {showPwd && <VscEyeClosed size={"24px"} className="opacity-50" />}
             </Btn>
+
+            {!checkPassword(password) && (
+              <small
+                className={
+                  !password.length
+                    ? "hidden "
+                    : "" +
+                      " w-full text-[red] capitalize text-right leading-none"
+                }
+              >
+                password contain 6-12 character long, 1 uppercase, 1 lowercase,
+                1 number / symbol
+              </small>
+            )}
           </div>
           <div className="grow " />
           <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full rounded-full">
