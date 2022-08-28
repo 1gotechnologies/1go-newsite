@@ -26,6 +26,11 @@ const Index = () => {
         element={auth ? <Home /> : <Navigate to={"login"} />}
       />
       <Route
+        path="dashboard"
+        // exact={true}
+        element={auth ? <Home /> : <Navigate to={"login"} />}
+      />
+      <Route
         path="/pending"
         // exact={true}
         element={
@@ -40,6 +45,16 @@ const Index = () => {
         path="/account"
         // exact={true}
         element={auth ? <Account /> : <Navigate to={"login"} />}
+      />
+      <Route
+        path="bucket-list"
+        // exact={true}
+        element={auth ? <ListPage type="pending" /> : <Navigate to={"login"} />}
+      />
+      <Route
+        path="settings"
+        // exact={true}
+        element={auth ? <ListPage type="pending" /> : <Navigate to={"login"} />}
       />
       {/* <Route
         path="/account/:agency"

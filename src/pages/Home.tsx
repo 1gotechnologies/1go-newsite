@@ -3,15 +3,19 @@ import MainLayout from "../layout/MainLayout";
 import { HiOutlineSearch } from "react-icons/hi";
 import { FormEventHandler, useState } from "react";
 import { Btn, OverlayShade } from "../components/Styled";
-import { CgClose } from "react-icons/cg";
-import { Search } from "../components/Search";
-import SummaryCard from "../components/SummaryCard";
+import { HiChevronRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { faker } from "@faker-js/faker";
+import TourListItem from "../components/TourListItem";
+import { DateTime } from "luxon";
 
 export default function Home() {
   const [agency, setAgency] = useState("STATSPIZZA CONSULTS LTD");
   const [openSearch, setOpenSearch] = useState(false);
+
+  const ongoing = {
+    image: faker.image.imageUrl(undefined, undefined, "house"),
+  };
 
   const search: FormEventHandler = (e) => {
     e.preventDefault();
@@ -20,64 +24,48 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <div>
-        {/* search agency */}
-        <div
-          onClick={() => setOpenSearch(!openSearch)}
-          className="pb-2 cursor-pointer sticky top-[3.8rem] bg-[#FCFCFC] z-10 scale-[105%] md:scale-[100%]"
-        >
-          <div className="bg-[#F2F2F2] px-2  pl-8 flex items-center justify-around relative container text-ellipsis  truncate ...">
-            <HiOutlineSearch className="min-w-[20px] h-auto absolute left-2" />
-            <div className="bg-inherit grow py-3">Search tour operators</div>
+      <div className="flex flex-col gap-10">
+        {/* ungoing tour */}
+        <section>
+          <h5 className="text-base pb-3">Ongoing tour</h5>
+          <div
+            style={{
+              backgroundImage: `url(${ongoing.image})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+            className=" min-h-[250px] md:!min-h-[300px] p-5 flex items-end bg-slate-800"
+          >
+            <div className="flex justify-between items-center w-full">
+              <h5 className="text-[white] max-w-[80%] md:max-w-[60%]">
+                Experience the 2022 world cup and the beauty of Qatar
+              </h5>
+              <HiChevronRight fontSize={"1.8rem"} className="text-[white]" />
+            </div>
           </div>
-        </div>
-
-        {/* agency */}
-        <div className="flex justify-between my-4 gap-2 container ">
-          <div className="text-ellipsis truncate ... max-w-[40%] grow">
-            <h5 className="text-[20px] font-normal">{agency}</h5>
-          </div>
-
-          <select name="" id="" className="bg-inherit max-w-[30%]">
-            <option value="2022FWC">2022 FIFA world cup</option>
-            <option value="all">All</option>
-          </select>
-        </div>
-
-        <section className="container flex flex-wrap lg:flex-nowrap justify-around gap-y-10 gap-x-5 sm:gap-10">
-          <Link to={`pending/${faker.random.alphaNumeric()}`}>
-            <SummaryCard type="pending" value={faker.random.numeric()} />
-          </Link>
-
-          <Link to={`declined/${faker.random.alphaNumeric()}`}>
-            <SummaryCard type="declined" value={faker.random.numeric()} />
-          </Link>
-
-          <Link to={`approved/${faker.random.alphaNumeric()}`}>
-            <SummaryCard type="approved" value={faker.random.numeric()} />
-          </Link>
-
-          <Link to={`paid/${faker.random.alphaNumeric()}`}>
-            <SummaryCard type="paid" value={faker.random.numeric()} />
-          </Link>
         </section>
 
-        <section className="container my-5 text-center bottom-0 left-0 right-0">
-          <h2 className="text-[45px] font-light">{faker.random.numeric(2)}</h2>
-          <p>Overall applications</p>
+        {/* upcoming tour */}
+        <section>
+          <h5 className="text-base pb-3">Upcoming tour</h5>
+          <div className="flex flex-wrap gap-5">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
+              <div className="w-full md:w-[45%] grow" key={index}>
+                <TourListItem
+                  title={faker.address.cityName()}
+                  for={"home"}
+                  duration={`${faker.date.future().getDay()} - ${faker.date
+                    .future()
+                    .getDay()} ${DateTime.fromISO(
+                    faker.date.future().toISOString()
+                  ).toFormat("LLLL")}`}
+                  image={faker.image.imageUrl()}
+                />
+              </div>
+            ))}
+          </div>
         </section>
-
-        {openSearch && (
-          <OverlayShade className="bg-slate-800 bg-opacity-25 overflow-y-auto pt-10">
-            <Btn
-              onClick={() => setOpenSearch(!openSearch)}
-              className="z-[9999999999] fixed top-5 right-5"
-            >
-              <CgClose fontSize={"1.8rem"} />
-            </Btn>
-            <Search />
-          </OverlayShade>
-        )}
       </div>
     </MainLayout>
   );

@@ -208,14 +208,17 @@ export default function Register() {
             )}
           </div>
           <div className="grow " />
+          <small className="w-[80%] sm:w-[60%] md:w-[80%] font-thin ">
+            By registering, I agree to the Privacy policy and Terms of use
+          </small>
+          <div className="grow " />
           <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full rounded-full">
             Register
           </Btn>
 
           <div className="flex items-center justify-center gap-3">
-            <span>or</span>
-            <Link to={"/login"} className="hover:text-[#1F66D0] text-lg">
-              {" "}
+            Already have an account?
+            <Link to={"/login"} className="text-[#1F66D0] text-lg">
               Login
             </Link>
           </div>

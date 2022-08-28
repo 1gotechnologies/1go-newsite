@@ -92,17 +92,22 @@ export default function Login() {
               </small>
             )}
           </div>
-          <div className="grow " />
+          <div className="grow min-h-[50px]" />
           <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full rounded-full">
             Login
           </Btn>
 
-          <div className="flex items-center justify-center gap-3">
-            <span>or</span>
-            <Link to={"/register"} className="hover:text-[#1F66D0] text-lg">
+          <div className="flex flex-col items-center justify-center gap-10">
+            <Link to={"/forgotten-password"} className="text-[#1F66D0] text-lg">
               {" "}
-              Register
+              Forgot password
             </Link>
+            <div className="flex items-center justify-center gap-3">
+              Don’t have an account yet?
+              <Link to={"/register"} className="text-[#1F66D0] text-lg">
+                Register
+              </Link>
+            </div>
           </div>
         </div>
       </form>

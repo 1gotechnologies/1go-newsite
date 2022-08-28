@@ -33,15 +33,15 @@ const MainLayout: React.FC<Props> = (props) => {
       {!props.auth && <HeaderComponent />}
       {props.auth && <AuthHeaderComponent />}
       <section
-        className={`grow py-5 container max-w-screen-lg px-5 ${
+        className={`grow py-5 container max-w-screen-lg px-2 ${
           props.auth
-            ? " flex h-full items-end md:items-center justify-around gap-7 px-10 py-20"
+            ? " flex h-full items-end md:items-center justify-around gap-7 !px-10 !py-20"
             : " "
         } `}
       >
         <> {props.children} </>
       </section>
-      <div className="p-5" />
+      <div className="p-10 md:p-5" />
       {!props.auth && <FooterComponent />}
     </main>
   );

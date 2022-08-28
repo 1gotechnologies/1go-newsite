@@ -42,13 +42,13 @@ const HeaderComponent = () => {
           <div className="min-w-[20vmin] relative hidden md:block">
             <Dropdown
               label={
-                <div className="flex justify-center gap-2 border-blue-700 transition-all duration-500 border-2 rounded-lg text-blue-700 px-2 py-1 hover:bg-blue-700 hover:text-white">
+                <button className="flex justify-center gap-2 border-blue-700 transition-all duration-500 border-2 rounded-lg text-blue-700 px-2 py-1 hover:bg-blue-700 hover:text-white">
                   <RiUser4Line className="min-w-[28px] min-h-[28px]" />
                   <strong>Account</strong>
-                </div>
+                </button>
               }
               content={
-                <div className="bg-white md:shadow md:rounded-md p-3 border-[#ccc] border-y md:border-0  flex flex-col relative md:absolute w-full right-2 gap-3">
+                <div className="bg-white md:shadow md:rounded-md mt-2 p-3 border-[#ccc] border-y md:border-0  flex flex-col relative md:absolute w-full right-2 gap-3">
                   <SLink to={"/login"}>Login</SLink>
                   <SLink to={"/register"}>Register</SLink>
                 </div>
