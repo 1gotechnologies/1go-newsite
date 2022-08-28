@@ -36,7 +36,9 @@ const FooterComponent = () => {
           <NavLink
             className={({ isActive }) =>
               "flex flex-col justify-center items-end transition-all duration-500" +
-              (!isActive ? "  text-[#ACAAAA] " : " text-[#1F66D0] ")
+              (!isActive && !location.pathname.startsWith("/bucket-list")
+                ? "  text-[#ACAAAA] "
+                : " text-[#1F66D0] ")
             }
             to={"/bucket-list"}
           >

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Account from "../pages/Account";
 import ListPage from "../pages/ListPage";
 import DetailsPage from "../pages/DetailsPage";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import SummaryPage from "../pages/SummaryPage";
+import OngoingTour from "../pages/OngoingTour";
+import BucketList from "../pages/BucketList";
+import Profile from "../pages/Profile";
 
 const Index = () => {
   const [title, setTitle] = useState("1go Admin Panel");
@@ -31,25 +33,24 @@ const Index = () => {
         element={auth ? <Home /> : <Navigate to={"login"} />}
       />
       <Route
-        path="/pending"
+        path="/ongoing-tour"
         // exact={true}
-        element={
-          auth ? <SummaryPage type="pending" /> : <Navigate to={"login"} />
-        }
+        element={auth ? <OngoingTour /> : <Navigate to={"login"} />}
       />
       <Route
-        path="/pending/:agency"
-        element={auth ? <ListPage type="pending" /> : <Navigate to={"login"} />}
-      />
-      <Route
-        path="/account"
+        path="/profile"
         // exact={true}
-        element={auth ? <Account /> : <Navigate to={"login"} />}
+        element={auth ? <Profile /> : <Navigate to={"login"} />}
       />
       <Route
         path="bucket-list"
         // exact={true}
-        element={auth ? <ListPage type="pending" /> : <Navigate to={"login"} />}
+        element={auth ? <BucketList /> : <Navigate to={"login"} />}
+      />
+      <Route
+        path="bucket-list/add"
+        // exact={true}
+        element={auth ? <BucketList add /> : <Navigate to={"login"} />}
       />
       <Route
         path="settings"

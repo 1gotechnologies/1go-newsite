@@ -4,6 +4,7 @@ import Avatar from "./Avatar";
 
 import { DateTime, Duration } from "luxon";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { faker } from "@faker-js/faker";
 
 interface Props {
   duration: string;
@@ -17,12 +18,14 @@ const ListItem: React.FC<Props> = (props) => {
     <div className="border-[##ACAAAA] rounded-3xl bg-inherit border border-1 shadow-md flex items-center gap-2 pr-3">
       <div
         style={{
-          backgroundImage: `url(${props.image})`,
+          backgroundImage: `url(${
+            props.image ?? faker.image.imageUrl(undefined, undefined, "place")
+          })`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
-        className="min-w-[100px] md:w-[30%] !min-h-[100px] md:!min-h-[120px] !bg-slate-500 rounded-l-3xl p-10"
+        className="min-w-[100px] md:w-[30%] !min-h-[75px] md:!min-h-[90px] !bg-slate-500 rounded-l-3xl"
       ></div>
       <div className="grow w-2 flex flex-col gap-1">
         <h5 className="text-base font-medium truncate">{props.title}</h5>

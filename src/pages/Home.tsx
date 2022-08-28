@@ -14,7 +14,7 @@ export default function Home() {
   const [openSearch, setOpenSearch] = useState(false);
 
   const ongoing = {
-    image: faker.image.imageUrl(undefined, undefined, "house"),
+    image: faker.image.imageUrl(undefined, undefined, "place"),
   };
 
   const search: FormEventHandler = (e) => {
@@ -28,26 +28,29 @@ export default function Home() {
         {/* ungoing tour */}
         <section>
           <h5 className="text-base pb-3">Ongoing tour</h5>
-          <div
+          <Link
             style={{
               backgroundImage: `url(${ongoing.image})`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
             }}
-            className=" min-h-[250px] md:!min-h-[300px] p-5 flex items-end bg-slate-800"
+            to={"/ongoing-tour"}
+            className=" block min-h-[250px] md:!min-h-[300px] bg-slate-800 relative"
           >
-            <div className="flex justify-between items-center w-full">
-              <h5 className="text-[white] max-w-[80%] md:max-w-[60%]">
-                Experience the 2022 world cup and the beauty of Qatar
-              </h5>
-              <HiChevronRight fontSize={"1.8rem"} className="text-[white]" />
+            <div className="bg-slate-900 absolute bg-opacity-20 w-full h-full top-0 left-0 p-5 flex flex-col justify-end text-left">
+              <div className="flex justify-between items-center w-full">
+                <h5 className="text-[white] max-w-[80%] md:max-w-[60%] font-medium truncate max-h-[75px]">
+                  Experience the 2022 world cup and the beauty of Qatar
+                </h5>
+                <HiChevronRight fontSize={"1.8rem"} className="text-[white]" />
+              </div>
             </div>
-          </div>
+          </Link>
         </section>
 
         {/* upcoming tour */}
-        <section>
+        <section className="px-2">
           <h5 className="text-base pb-3">Upcoming tour</h5>
           <div className="flex flex-wrap gap-5">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
@@ -60,7 +63,6 @@ export default function Home() {
                     .getDay()} ${DateTime.fromISO(
                     faker.date.future().toISOString()
                   ).toFormat("LLLL")}`}
-                  image={faker.image.imageUrl()}
                 />
               </div>
             ))}

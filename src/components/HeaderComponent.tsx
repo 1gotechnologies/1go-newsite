@@ -114,21 +114,23 @@ const HeaderComponent = () => {
           />
         </div>
 
-        <Link
-          className={
-            "flex gap-2 items-center self-center min-w-fit shrink md:hidden"
-          }
-          to={"/profile"}
-        >
-          <span className="grow hidden md:block">Hi, {user}</span>
+        {isHome && (
+          <Link
+            className={
+              "flex gap-2 items-center self-center min-w-fit shrink md:hidden"
+            }
+            to={"/profile"}
+          >
+            <span className="grow hidden md:block">Hi, {user}</span>
 
-          <FaUserCircle
-            fontSize={"2rem"}
-            className={`transition-all duration-300 text-[#ACAAAA] ${
-              !show ? " !h-fit !scale-100" : " !max-h-0 !scale-0"
-            }`}
-          />
-        </Link>
+            <FaUserCircle
+              fontSize={"2rem"}
+              className={`transition-all duration-300 text-[#ACAAAA] ${
+                !show ? " !h-fit !scale-100" : " !max-h-0 !scale-0"
+              }`}
+            />
+          </Link>
+        )}
       </div>
     </header>
   );

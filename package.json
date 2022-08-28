@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.2.3",
     "country-state-city": "^3.1.0",
     "libphonenumber-js": "^1.10.13",
     "luxon": "^3.0.1",
