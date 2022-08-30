@@ -14,6 +14,7 @@ const HeaderComponent = () => {
   const [user, setUser] = useState("Admin");
   const [show, setShow] = useState(false);
   const [isHome, setIsHome] = useState(false);
+  const [prevRoute, setPrevRoute] = useState<string>();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,9 +22,14 @@ const HeaderComponent = () => {
   useEffect(() => {
     setIsHome(location.pathname === "/" || location.pathname === "/dashboard");
     show ? toggleNav() : null;
+    setPrevRoute(history.state.key);
+    console.log(history.state);
   }, [location]);
-  const goBack = () => navigate(-1);
-
+  const goBack = () => {
+    prevRoute === undefined || history.state.key !== prevRoute
+      ? navigate("/")
+      : navigate(-1);
+  };
   const toggleNav = () => setShow(!show);
 
   return (

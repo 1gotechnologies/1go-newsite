@@ -10,11 +10,9 @@ import TourListItem from "../components/TourListItem";
 import { DateTime } from "luxon";
 
 export default function Home() {
-  const [agency, setAgency] = useState("STATSPIZZA CONSULTS LTD");
-  const [openSearch, setOpenSearch] = useState(false);
-
   const ongoing = {
     image: faker.image.imageUrl(undefined, undefined, "place"),
+    id: faker.database.mongodbObjectId(),
   };
 
   const search: FormEventHandler = (e) => {
@@ -35,7 +33,7 @@ export default function Home() {
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
             }}
-            to={"/ongoing-tour"}
+            to={`/ongoing-tour/${ongoing.id}`}
             className=" block min-h-[250px] md:!min-h-[300px] bg-slate-800 relative"
           >
             <div className="bg-slate-900 absolute bg-opacity-20 w-full h-full top-0 left-0 p-5 flex flex-col justify-end text-left">
@@ -50,7 +48,7 @@ export default function Home() {
         </section>
 
         {/* upcoming tour */}
-        <section className="px-2">
+        <section className="px-2 md:px-10">
           <h5 className="text-base pb-3">Upcoming tour</h5>
           <div className="flex flex-wrap gap-5">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (

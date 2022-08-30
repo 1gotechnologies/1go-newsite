@@ -1,78 +1,38 @@
-import MainLayout from "../layout/MainLayout";
-import React from "react";
 import { faker } from "@faker-js/faker";
-import ImageCard from "./ImageCard";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { HiChevronRight } from "react-icons/hi";
+import { DateTime } from "luxon";
+import React, { Dispatch, SetStateAction } from "react";
+import AvailableAgentCard from "./AvailableAgentCard";
 
-// Full name:
-// Category:
-// Number of persons:
-// Email address:
-// Phone number:
-// Package type:
-// Price:
-
-const OngoingTourAgent = () => {
-  const fact = faker.lorem.sentence();
-  const media = `https://api.pexels.com/videos/`;
-  const { id } = useParams();
-  const tourLocation = faker.address.country();
-  const snippet = faker.lorem.sentence();
-
+const OngoingTourAgent: React.FC<{
+  setStep: React.Dispatch<React.SetStateAction<string>>;
+}> = (props) => {
   return (
-    <>
-      {" "}
-      {/* snippet */}
-      <div className=" font-light">{snippet}</div>
-      {/* image */}
-      <div className="">
-        <video src={media} className="w-full bg-slate-500"></video>
-      </div>
-      {/* fact */}
-      <div className="">
-        <strong>Did you know that:</strong> {fact}
-      </div>
-      {/* places */}
-      <div className="">
-        <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
-            <div className="w-full md:w-[45%] grow" key={index}>
-              <ImageCard
-                title={faker.address.city()}
-                caption={faker.lorem.sentence()}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* foods */}
-      <div className="">
-        <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
-            <div className="w-full md:w-[45%] grow" key={index}>
-              <ImageCard
-                title={faker.address.city()}
-                caption={faker.lorem.sentence()}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* continue to select agent */}
-      <div className="max-w-screen-sm w-full self-center">
-        <Link
-          to={`${tourLocation}/select-agent`}
-          className="flex justify-center items-center text-[white] bg-[#1F66D0] rounded-3xl py-4 px-3 gap-10"
-        >
-          <span className="text-lg font-semibold">Continue</span>
+    <div className=" flex flex-col gap-7 ">
+      <p className="pt-2">Select your tour agent</p>
+      <h1 className="capitalize text-2xl font-semibold !w-full pb-3 !bg-inherit z-10">
+        Available tour agent
+      </h1>
 
-          <HiChevronRight fontSize={"1.8rem"} className="" />
-        </Link>
+      <div className="flex flex-wrap gap-3 justify-around">
+        {[1, 2, 3, 4, 5, 6, 7].map((el) => (
+          <div className=" w-[95%] sm:w-[48%] lg:w-[30%]" key={el}>
+            <AvailableAgentCard
+              package={faker.lorem.sentence()}
+              prices={{}}
+              duration={`${faker.date.future().getDay()} - ${faker.date
+                .future()
+                .getDay()} ${DateTime.fromISO(
+                faker.date.future().toISOString()
+              ).toFormat("LLLL")}`}
+              name={faker.company.name()}
+              logo={faker.image.abstract()}
+              id={faker.database.mongodbObjectId()}
+              select={() => props.setStep("category")}
+            />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

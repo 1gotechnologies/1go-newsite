@@ -19,12 +19,12 @@ const Profile = () => {
   return (
     <MainLayout>
       <section className=" container max-w-screen-md flex flex-col gap-6 px-5">
-        <div className=" flex justify-between items-center">
+        <div className=" flex justify-between items-center mx-auto w-full md:max-w-screen-sm">
           <span>Number of booked tours:</span>
           <span>0</span>
         </div>
 
-        <h1 className="capitalize text-2xl font-semibold sticky top-[70px] md:top-11 !w-full py-3 !bg-[#FCFCFC] z-10">
+        <h1 className="capitalize text-2xl font-semibold sticky top-[70px] md:top-11 !w-full pt-3 pb-2 bg-[#FCFCFC] z-10">
           Profile
         </h1>
 

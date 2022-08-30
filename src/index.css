@@ -9,3 +9,12 @@ body{
 .responsive-nav {
     max-height: calc(100vh - 8rem);
 }
+
+.slide::-webkit-scrollbar{
+    @apply h-1 rounded overflow-hidden
+}
+
+.slide::-webkit-scrollbar-thumb{
+    @apply bg-slate-500 rounded cursor-pointer
+
+}

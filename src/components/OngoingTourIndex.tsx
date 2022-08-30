@@ -13,13 +13,13 @@ const OngoingTourIndex = () => {
   const snippet = faker.lorem.sentence();
 
   return (
-    <>
+    <div className=" flex flex-col gap-8 ">
       {" "}
       {/* snippet */}
       <div className=" font-light">{snippet}</div>
       {/* image */}
       <div className="">
-        <video src={media} className="w-full bg-slate-500"></video>
+        <video src={""} className="w-full bg-slate-500"></video>
       </div>
       {/* fact */}
       <div className="">
@@ -28,7 +28,7 @@ const OngoingTourIndex = () => {
       {/* places */}
       <div className="">
         <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3">
+        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3 slide">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
             <div className="w-full md:w-[45%] grow" key={index}>
               <ImageCard
@@ -42,7 +42,7 @@ const OngoingTourIndex = () => {
       {/* foods */}
       <div className="">
         <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3">
+        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3 slide">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
             <div className="w-full md:w-[45%] grow" key={index}>
               <ImageCard
@@ -56,7 +56,7 @@ const OngoingTourIndex = () => {
       {/* continue to select agent */}
       <div className="max-w-screen-sm w-full self-center">
         <Link
-          to={`${tourLocation}/select-agent`}
+          to={"continue"}
           className="flex justify-center items-center text-[white] bg-[#1F66D0] rounded-3xl py-4 px-3 gap-10"
         >
           <span className="text-lg font-semibold">Continue</span>
@@ -64,7 +64,7 @@ const OngoingTourIndex = () => {
           <HiChevronRight fontSize={"1.8rem"} className="" />
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

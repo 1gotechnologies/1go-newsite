@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import ListPage from "../pages/ListPage";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -11,7 +10,7 @@ import Profile from "../pages/Profile";
 import BucketListAdd from "../components/BucketListAdd";
 import OngoingTourIndex from "../components/OngoingTourIndex";
 import BucketListIndex from "../components/BucketListIndex";
-import OngoingTourAgent from "../components/OngoingTourAgent";
+import OngoingTourProcess from "../components/OngoingTourProcess";
 
 const Index = () => {
   const [title, setTitle] = useState("1go Admin Panel");
@@ -25,52 +24,38 @@ const Index = () => {
 
   return (
     <Routes>
-      <Route path="/" element={auth ? <Home /> : <Navigate to={"login"} />} />
+      <Route path="" element={auth ? <Home /> : <Navigate to={"/login"} />} />
 
       <Route
         path="dashboard"
-        element={auth ? <Home /> : <Navigate to={"login"} />}
+        element={auth ? <Home /> : <Navigate to={"/login"} />}
       />
 
       <Route
         path="ongoing-tour"
-        element={auth ? <OngoingTour /> : <Navigate to={"login"} />}
+        element={auth ? <OngoingTour /> : <Navigate to={"/login"} />}
       >
-        <Route path="" element={<OngoingTourIndex />} />
-        <Route path=":id/select-agent" element={<OngoingTourAgent />} />
-        <Route path=":id/select-category" element={<OngoingTour />} />
-        <Route path=":id/visa-registration" element={<OngoingTour />} />
-        <Route path=":id/select-package" element={<OngoingTour />} />
-        <Route path=":id/booking-summary" element={<OngoingTour />} />
-        <Route path=":id/booking-complete" element={<OngoingTour />} />
-        <Route path=":id/booking-ticket" element={<OngoingTour />} />
+        <Route path=":id/" element={<OngoingTourIndex />} />
+        <Route path=":id/continue" element={<OngoingTourProcess />} />
       </Route>
 
       <Route
         path="profile"
-        // exact={true}
-        element={auth ? <Profile /> : <Navigate to={"login"} />}
+        element={auth ? <Profile /> : <Navigate to={"/login"} />}
+      />
+
+      <Route
+        path="settings"
+        element={auth ? <Profile /> : <Navigate to={"/login"} />}
       />
 
       <Route
         path="bucket-list"
-        element={auth ? <BucketList /> : <Navigate to={"login"} />}
+        element={auth ? <BucketList /> : <Navigate to={"/login"} />}
       >
-        <Route
-          path=""
-          element={auth ? <BucketListIndex /> : <Navigate to={"login"} />}
-        />
-        <Route
-          path="add"
-          element={auth ? <BucketListAdd /> : <Navigate to={"login"} />}
-        />
+        <Route path="" element={<BucketListIndex />} />
+        <Route path="add" element={<BucketListAdd />} />
       </Route>
-
-      <Route
-        path="settings"
-        // exact={true}
-        element={auth ? <ListPage type="pending" /> : <Navigate to={"login"} />}
-      />
 
       <Route
         path="login"
