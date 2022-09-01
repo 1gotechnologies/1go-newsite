@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import OngoingTour from "../pages/OngoingTour";
-import BucketList from "../pages/BucketList";
-import Profile from "../pages/Profile";
+import Home from "./Home";
+import Login from "./Login";
+import Register from "./Register";
+import OngoingTour from "./OngoingTour";
+import BucketList from "./BucketList";
+import Profile from "./Profile";
 import BucketListAdd from "../components/BucketListAdd";
 import OngoingTourIndex from "../components/OngoingTourIndex";
 import BucketListIndex from "../components/BucketListIndex";
 import OngoingTourProcess from "../components/OngoingTourProcess";
+import UpcomingTour from "./UpcomingTour";
 
 const Index = () => {
   const [title, setTitle] = useState("1go Admin Panel");
@@ -37,6 +38,22 @@ const Index = () => {
       >
         <Route path=":id/" element={<OngoingTourIndex />} />
         <Route path=":id/continue" element={<OngoingTourProcess />} />
+      </Route>
+
+      <Route
+        path="upcoming-tour"
+        element={auth ? <UpcomingTour /> : <Navigate to={"/login"} />}
+      >
+        <Route path=":id" element={<OngoingTourIndex />}>
+          <Route path="food" element={<UpcomingTour />}>
+            <Route path="" element={<OngoingTourIndex />} />
+            <Route path=":food" element={<OngoingTourIndex />} />
+          </Route>
+          <Route path="places" element={<UpcomingTour />}>
+            <Route path="" element={<OngoingTourIndex />} />
+            <Route path=":place" element={<OngoingTourIndex />} />
+          </Route>
+        </Route>
       </Route>
 
       <Route

@@ -1,14 +1,18 @@
 import { Btn } from "./Styled";
 import { BiArrowBack } from "react-icons/bi";
 import OngoingTourAgent from "./OngoingTourAgent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OngoingTourCategory from "./OngoingTourCategory";
 import OngoingTourVisa from "./OngoingTourVisa";
+import OngoingTourMultiplePersons from "./OngoingTourMultiplePersons";
+import useBookingStore from "../stores/booking";
 
 const OngoingTourProcess = () => {
   const [step, setStep] = useState<string>("start");
   const navigate = useNavigate();
+  const booking = useBookingStore();
+  const { id } = useParams();
   const backOne = () => {
     step === "category"
       ? setStep("start")
@@ -28,6 +32,10 @@ const OngoingTourProcess = () => {
     });
   }, [step]);
 
+  useEffect(() => {
+    booking.tourId = id;
+  }, [id]);
+
   return (
     <>
       <Btn
@@ -40,6 +48,8 @@ const OngoingTourProcess = () => {
         <OngoingTourAgent setStep={setStep} />
       ) : step === "category" ? (
         <OngoingTourCategory setStep={setStep} />
+      ) : step === "persons" ? (
+        <OngoingTourMultiplePersons setStep={setStep} />
       ) : step === "visa" ? (
         <OngoingTourVisa setStep={setStep} />
       ) : (

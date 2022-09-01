@@ -5,6 +5,10 @@ const Btn = styled.button`
   outline: none;
   border: none;
   padding: 0.25rem;
+
+  &hover {
+    bacground-opacity: 0.5;
+  }
 `;
 
 const Input = styled.input`

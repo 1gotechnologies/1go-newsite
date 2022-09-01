@@ -2,21 +2,20 @@ import create from "zustand";
 
 interface BookingState {
   tourId?: string;
-  agent?: string;
+  agentId?: string;
   category?: string;
   package?: string;
   visa?: string[];
+  persons?: number;
 }
 
 const useBookingStore = create<BookingState>((set) => ({
   tourId: "",
-  agent: "",
+  agentId: "",
+  persons: 1,
   category: "",
   package: "",
   visa: [],
-  change: (val: Partial<BookingState>) =>
-    set((state: BookingState) => ({ ...state, ...val })),
-  book: async () => {},
 }));
 
 export default useBookingStore;

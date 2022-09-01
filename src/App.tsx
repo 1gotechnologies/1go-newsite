@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import Index from "./routes/Index";
+import Index from "./pages/Index";
 function App() {
   return (
     <BrowserRouter>

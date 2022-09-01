@@ -5,6 +5,7 @@ import { Btn } from "./Styled";
 export interface Props {
   label: React.ReactElement;
   content: React.ReactElement;
+  direction?: "down" | "up";
 }
 
 const Dropdown: React.FC<Props> = (props) => {
@@ -23,9 +24,9 @@ const Dropdown: React.FC<Props> = (props) => {
         {props.label}
       </div>
       <div
-        className={`dropdown-content z-[99999] bottom-[-50%] w-full relative min-w-fit transition-all duration-500 ${
+        className={`dropdown-content z-[49] bottom-[-50%] w-full relative min-w-fit transition-all duration-500 ${
           show ? "!scale-100" : " !max-h-0 !scale-0"
-        }`}
+        } ${props.direction === "up" ? " absolute bottom-4 " : " "}`}
       >
         {props.content}
       </div>

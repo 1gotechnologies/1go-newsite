@@ -72,6 +72,7 @@ const PhoneInput: React.FC<Props> = (props) => {
       <div className="flex flex-nowrap gap-2">
         <select
           className={
+            props.className ??
             "max-w-[100px] bg-inherit border-[#d9d9d9] border-0 border-b-[3px] focus:!border-b-[#1F66D0] "
           }
           name=""
@@ -89,7 +90,10 @@ const PhoneInput: React.FC<Props> = (props) => {
         </select>
         <Input
           className={
-            "text-lg grow" + numberError && numberError?.message && value.length
+            props.className ??
+            ("text-lg grow" + numberError &&
+              numberError?.message &&
+              value.length)
               ? " focus:!border-b-[red] !border-b-[red] "
               : " focus:!border-b-[#1F66D0] "
           }

@@ -1,18 +1,20 @@
 import { faker } from "@faker-js/faker";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi";
 import useBookingStore from "../stores/booking";
-import PassportUpload from "./PassportUpload";
-import CategorySelect from "./RadioSelect";
+import RadioSelect from "./RadioSelect";
 import { Btn } from "./Styled";
 
-const OngoingTourVisa: React.FC<{
+const OngoingTourCategory: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
-  const [visas, setVisas] = useState<string[]>();
+  const [selected, setSelected] = useState<number>();
   const booking = useBookingStore();
-  const persons = useRef(booking.persons);
+  const next = () => {
+    booking.persons = selected;
+    props.setStep("visa");
+  };
   return (
     <div className=" flex flex-col gap-7 ">
       {/* brand */}
@@ -33,39 +35,30 @@ const OngoingTourVisa: React.FC<{
         <FaQuestionCircle size={"1.8rem"} />
       </div>
       <p className="pt-2">Flight, Accomodation, tour and Match tickets</p>
-
-      <h1 className="capitalize text-2xl font-semibold !w-full !bg-[#FCFCFC] z-10">
-        Visa(Fan ID) registration
-      </h1>
-
-      <p>
-        You will need a visa(fanID) in order to acquire your flight ticket.
-        Please note that your visa comes in the form of a fanID and is only
-        valid before and during the 2022 world cup at Qatar. To begin
-        registration of your fanID you will first need to provide your
-        international passport
-      </p>
-
-      <h1 className="capitalize text-2xl font-semibold !w-full pb-3 !bg-[#FCFCFC] z-10">
-        Upload International passport
+      <h1 className="capitalize text-2xl font-semibold !w-full pb-3 z-10">
+        Select the number of individuals
       </h1>
 
       <div className="flex flex-col gap-4">
-        {persons.current &&
-          Array.from({ length: persons.current }, (v, i) => i).map((el) => (
-            <PassportUpload index={el} key={el} />
-          ))}
+        {[3, 4, 5].map((el, index) => (
+          <RadioSelect
+            value={el}
+            selected={el === selected}
+            select={() => setSelected(el)}
+            key={index}
+          />
+        ))}
       </div>
 
       {/* continue to select agent */}
       <div className="max-w-screen-sm w-full self-center">
         <Btn
           className={`flex justify-center items-center text-[white] w-full rounded-3xl !py-4 !px-3 gap-10 transition-all duration-500 ${
-            visas?.length ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
+            selected ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
           }`}
           type="button"
-          onClick={() => props.setStep("visa")}
-          disabled={visas?.length !== persons.current ? true : false}
+          onClick={next}
+          disabled={!selected ? true : false}
         >
           <span className="text-lg font-semibold">Continue</span>
 
@@ -76,4 +69,4 @@ const OngoingTourVisa: React.FC<{
   );
 };
 
-export default OngoingTourVisa;
+export default OngoingTourCategory;

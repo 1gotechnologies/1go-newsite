@@ -10,12 +10,12 @@ interface Props {
   name: string;
   logo: string;
   id: string;
-  select: () => void;
+  select: (id: string) => void;
 }
 
 const AvailableAgentCard: React.FC<Props> = (props) => {
-  const select = () => {
-    props.select();
+  const select = (id: string) => {
+    props.select(id);
   };
   return (
     <div className="rounded-2xl shadow-md mx-auto max-w-[350px] border-[##ACAAAA] border p-3 flex  break-all flex-col gap-5 min-h-[450px]">
@@ -71,7 +71,8 @@ const AvailableAgentCard: React.FC<Props> = (props) => {
 
       <Btn
         className="w-[200px] bg-[#1F66D0] text-white font-semibold !py-3 self-center my-3"
-        onClick={select}
+        onClick={() => select(props.id)}
+        type="button"
       >
         Select
       </Btn>

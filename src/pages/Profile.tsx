@@ -146,7 +146,7 @@ const Profile = () => {
               Change phone number
             </Link>
 
-            <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full md:w-[50%] rounded-full h-fit">
+            <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-50 w-full md:w-[50%] rounded-full h-fit">
               Save changes
             </Btn>
           </div>

@@ -52,7 +52,11 @@ export default function Home() {
           <h5 className="text-base pb-3">Upcoming tour</h5>
           <div className="flex flex-wrap gap-5">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
-              <div className="w-full md:w-[45%] grow" key={index}>
+              <Link
+                className="w-full md:w-[45%] grow"
+                key={index}
+                to={`/upcoming-tour/${index}`}
+              >
                 <TourListItem
                   title={faker.address.cityName()}
                   for={"home"}
@@ -62,7 +66,7 @@ export default function Home() {
                     faker.date.future().toISOString()
                   ).toFormat("LLLL")}`}
                 />
-              </div>
+              </Link>
             ))}
           </div>
         </section>

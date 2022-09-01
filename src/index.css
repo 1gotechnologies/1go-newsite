@@ -10,11 +10,15 @@ body{
     max-height: calc(100vh - 8rem);
 }
 
+.slide{
+    @apply cursor-grabbing 
+}
+
 .slide::-webkit-scrollbar{
-    @apply h-1 rounded overflow-hidden
+    @apply md:h-1 md:rounded md:overflow-hidden
 }
 
 .slide::-webkit-scrollbar-thumb{
-    @apply bg-slate-500 rounded cursor-pointer
+    @apply md:bg-slate-500 md:rounded md:cursor-pointer
 
 }

@@ -93,6 +93,7 @@ const HeaderComponent = () => {
                       : " text-[#1F66D0] ")
                   }
                   to={"/dashboard"}
+                  onClick={scrollToTop}
                 >
                   Dashboard
                 </NavLink>
@@ -102,6 +103,7 @@ const HeaderComponent = () => {
                     (!isActive ? " text-[#ACAAAA] " : " text-[#1F66D0] ")
                   }
                   to={"/profile"}
+                  onClick={scrollToTop}
                 >
                   Profile
                 </NavLink>
@@ -111,6 +113,7 @@ const HeaderComponent = () => {
                     (!isActive ? "  text-[#ACAAAA] " : " text-[#1F66D0] ")
                   }
                   to={"/bucket-list"}
+                  onClick={scrollToTop}
                 >
                   Bucket List
                 </NavLink>
@@ -120,6 +123,7 @@ const HeaderComponent = () => {
                     (!isActive ? "  text-[#ACAAAA] " : " text-[#1F66D0] ")
                   }
                   to={"/settings"}
+                  onClick={scrollToTop}
                 >
                   Settings
                 </NavLink>

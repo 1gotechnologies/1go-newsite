@@ -2,13 +2,21 @@ import { faker } from "@faker-js/faker";
 import React, { useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi";
-import CategorySelect from "./CategorySelect";
+import useBookingStore from "../stores/booking";
+import RadioSelect from "./RadioSelect";
 import { Btn } from "./Styled";
 
 const OngoingTourCategory: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
   const [selected, setSelected] = useState<string>();
+  const booking = useBookingStore();
+  const next = () => {
+    booking.category = selected;
+    selected === "single" ? (booking.persons = 1) : (booking.persons = 2);
+    selected !== "multiple" ? props.setStep("visa") : props.setStep("persons");
+    console.log(booking);
+  };
   return (
     <div className=" flex flex-col gap-7 ">
       {/* brand */}
@@ -35,8 +43,8 @@ const OngoingTourCategory: React.FC<{
 
       <div className="flex flex-col gap-4">
         {["single", "couple", "multiple"].map((el, index) => (
-          <CategorySelect
-            type={el}
+          <RadioSelect
+            value={el}
             selected={el === selected}
             select={() => setSelected(el)}
             key={index}
@@ -50,7 +58,8 @@ const OngoingTourCategory: React.FC<{
           className={`flex justify-center items-center text-[white] w-full rounded-3xl !py-4 !px-3 gap-10 transition-all duration-500 ${
             selected ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
           }`}
-          onClick={() => props.setStep("visa")}
+          type="button"
+          onClick={next}
           disabled={!selected ? true : false}
         >
           <span className="text-lg font-semibold">Continue</span>
