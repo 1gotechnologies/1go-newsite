@@ -34,7 +34,7 @@ export default function Home() {
               backgroundPosition: "center",
             }}
             to={`/ongoing-tour/${ongoing.id}`}
-            className=" block min-h-[250px] md:!min-h-[300px] bg-slate-800 relative"
+            className=" block min-h-[250px] md:!min-h-[400px] bg-slate-800 relative"
           >
             <div className="bg-slate-900 absolute bg-opacity-20 w-full h-full top-0 left-0 p-5 flex flex-col justify-end text-left">
               <div className="flex justify-between items-center w-full">

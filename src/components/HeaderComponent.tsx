@@ -23,8 +23,15 @@ const HeaderComponent = () => {
     setIsHome(location.pathname === "/" || location.pathname === "/dashboard");
     show ? toggleNav() : null;
     setPrevRoute(history.state.key);
-    console.log(history.state);
   }, [location]);
+
+  const scrollToTop = () =>
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+
   const goBack = () => {
     prevRoute === undefined || history.state.key !== prevRoute
       ? navigate("/")
@@ -48,6 +55,7 @@ const HeaderComponent = () => {
         <NavLink
           className="hidden md:block text-gray-900 text-lg md:text-xl no-underline font-bold min-w-fit"
           to="/"
+          onClick={scrollToTop}
         >
           <div className="pl-2 md:pl-0 flex gap-2 justify-between items-end md:items-center">
             <img src={logo} className="w-[35px] h-auto" />

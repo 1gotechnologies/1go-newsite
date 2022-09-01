@@ -4,6 +4,7 @@ import OngoingTourAgent from "./OngoingTourAgent";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OngoingTourCategory from "./OngoingTourCategory";
+import OngoingTourVisa from "./OngoingTourVisa";
 
 const OngoingTourProcess = () => {
   const [step, setStep] = useState<string>("start");
@@ -40,7 +41,7 @@ const OngoingTourProcess = () => {
       ) : step === "category" ? (
         <OngoingTourCategory setStep={setStep} />
       ) : step === "visa" ? (
-        <>Upload visa</>
+        <OngoingTourVisa setStep={setStep} />
       ) : (
         ""
       )}
