@@ -4,9 +4,10 @@ import OngoingTourAgent from "./OngoingTourAgent";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OngoingTourCategory from "./OngoingTourCategory";
-import OngoingTourVisa from "./OngoingTourVisa";
 import OngoingTourMultiplePersons from "./OngoingTourMultiplePersons";
 import useBookingStore from "../stores/booking";
+import OngoingTourPassport from "./OngoingTourPassport";
+import OngoingTourPackage from "./OngoingTourPackage";
 
 const OngoingTourProcess = () => {
   const [step, setStep] = useState<string>("start");
@@ -16,8 +17,18 @@ const OngoingTourProcess = () => {
   const backOne = () => {
     step === "category"
       ? setStep("start")
-      : step === "visa"
+      : step === "documents" && booking.category !== "multiple"
       ? setStep("category")
+      : step === "documents" && booking.category === "multiple"
+      ? setStep("persons")
+      : step === "persons"
+      ? setStep("category")
+      : step === "packages"
+      ? setStep("documents")
+      : step === "preview"
+      ? setStep("packages")
+      : step === "finish"
+      ? setStep("preview")
       : navigate(-1);
   };
   const goBack = () => {
@@ -50,8 +61,12 @@ const OngoingTourProcess = () => {
         <OngoingTourCategory setStep={setStep} />
       ) : step === "persons" ? (
         <OngoingTourMultiplePersons setStep={setStep} />
-      ) : step === "visa" ? (
-        <OngoingTourVisa setStep={setStep} />
+      ) : step === "documents" ? (
+        <OngoingTourPassport setStep={setStep} />
+      ) : step === "packages" ? (
+        <OngoingTourPackage setStep={setStep} />
+      ) : step === "preview" ? (
+        <OngoingTourPackage setStep={setStep} />
       ) : (
         ""
       )}

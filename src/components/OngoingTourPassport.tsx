@@ -4,15 +4,23 @@ import { FaQuestionCircle } from "react-icons/fa";
 import { HiChevronRight } from "react-icons/hi";
 import useBookingStore from "../stores/booking";
 import PassportUpload from "./PassportUpload";
-import CategorySelect from "./RadioSelect";
 import { Btn } from "./Styled";
 
-const OngoingTourVisa: React.FC<{
+const OngoingTourPassport: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
-  const [visas, setVisas] = useState<string[]>();
+  const [visas, setVisas] = useState<object[]>();
+  const [visasComplete, setVisasComplete] = useState(false);
   const booking = useBookingStore();
   const persons = useRef(booking.persons);
+  const setFile = (index: number, val: object) => {
+    const files = visas ?? [];
+    files[index] = [val];
+    console.log({ visas });
+    setVisas(files);
+    console.log({ visas });
+    setVisasComplete(visas?.length === persons.current);
+  };
   return (
     <div className=" flex flex-col gap-7 ">
       {/* brand */}
@@ -53,7 +61,7 @@ const OngoingTourVisa: React.FC<{
       <div className="flex flex-col gap-4">
         {persons.current &&
           Array.from({ length: persons.current }, (v, i) => i).map((el) => (
-            <PassportUpload index={el} key={el} />
+            <PassportUpload index={el} key={el} setFile={setFile} />
           ))}
       </div>
 
@@ -61,11 +69,11 @@ const OngoingTourVisa: React.FC<{
       <div className="max-w-screen-sm w-full self-center">
         <Btn
           className={`flex justify-center items-center text-[white] w-full rounded-3xl !py-4 !px-3 gap-10 transition-all duration-500 ${
-            visas?.length ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
+            visasComplete ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
           }`}
           type="button"
-          onClick={() => props.setStep("visa")}
-          disabled={visas?.length !== persons.current ? true : false}
+          onClick={() => props.setStep("packages")}
+          disabled={!visasComplete}
         >
           <span className="text-lg font-semibold">Continue</span>
 
@@ -76,4 +84,4 @@ const OngoingTourVisa: React.FC<{
   );
 };
 
-export default OngoingTourVisa;
+export default OngoingTourPassport;

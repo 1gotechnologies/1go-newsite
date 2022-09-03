@@ -1,15 +1,31 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FormEventHandler, useEffect, useRef, useState } from "react";
 import Dropdown from "./Dropdown";
 import { Btn } from "./Styled";
 
-const PassportUpload: React.FC<{ index: number | string }> = (props) => {
+const PassportUpload: React.FC<{
+  index: number;
+  setFile: (index: number, val: object) => any;
+}> = (props) => {
   const [fileName, setFileName] = useState<string>();
-  const upload = () => {
-    setFileName(`passport-${props.index}-select`);
+  const [show, setShow] = useState(false);
+  const fileInput = useRef<HTMLInputElement>();
+  const getFileName = () => {
+    if (fileInput.current?.files) setFileName(fileInput.current.files[0].name);
+    setShow(false);
   };
+
+  const upload: FormEventHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (fileInput.current?.files)
+      props.setFile(props.index, fileInput.current.files[0]);
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
+    <form onSubmit={upload} className="flex flex-col gap-3">
       <Dropdown
+        show={show}
+        setShow={setShow}
         label={
           <div
             className={`bg-[#e5e5e5] p-4 truncate cursor-pointer ${
@@ -34,6 +50,8 @@ const PassportUpload: React.FC<{ index: number | string }> = (props) => {
                 id={`passport-${props.index}-select`}
                 accept="image/*"
                 hidden
+                ref={fileInput}
+                onChange={getFileName}
               />
             </div>
           </div>

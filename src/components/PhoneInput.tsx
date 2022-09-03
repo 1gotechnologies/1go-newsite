@@ -5,13 +5,18 @@ import {
   PhoneNumber,
   validatePhoneNumberLength,
 } from "libphonenumber-js";
-import { Input } from "./Styled";
 import countries from "../utils/countries";
 
 interface Props {
   number?: string;
   setNumber: (val: string) => any;
   className?: string;
+  placeholder?: string;
+  border?: boolean;
+  style?: {
+    code?: string;
+    number?: string;
+  };
 }
 
 const PhoneInput: React.FC<Props> = (props) => {
@@ -68,15 +73,12 @@ const PhoneInput: React.FC<Props> = (props) => {
     updateValue();
   }, [propsNumber]);
   return (
-    <div className={props.className + "flex flex-col"}>
+    <div className={props.className + " flex flex-col"}>
       <div className="flex flex-nowrap gap-2">
         <select
-          className={
-            props.className ??
-            "max-w-[100px] bg-inherit border-[#d9d9d9] border-0 border-b-[3px] focus:!border-b-[#1F66D0] "
-          }
-          name=""
-          id=""
+          className={`max-w-[100px] bg-inherit ${props.style?.code} ${
+            props.border ? " border-[#d9d9d9] border-b-[3px] " : " "
+          }`}
           value={country?.code}
           onChange={(e) => {
             setCountry(countries.find((i) => e.target.value === i.code));
@@ -88,21 +90,22 @@ const PhoneInput: React.FC<Props> = (props) => {
             </option>
           ))}
         </select>
-        <Input
-          className={
-            props.className ??
-            ("text-lg grow" + numberError &&
-              numberError?.message &&
-              value.length)
-              ? " focus:!border-b-[red] !border-b-[red] "
-              : " focus:!border-b-[#1F66D0] "
-          }
-          placeholder="+234*******"
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        />
+        <div className={"grow "}>
+          <input
+            className={`!w-full !outline-none !border-0 !bg-inherit ${
+              props.style?.number
+            } ${props.border ? " !border-[#d9d9d9] !border-b-[3px] " : " "}  ${
+              numberError && numberError?.message && value.length && country
+                ? " focus:!border-b-[red] !border-b-[red] "
+                : " focus:!border-b-[#1F66D0]"
+            }`}
+            placeholder={props.placeholder ?? "+234*******"}
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+          />
+        </div>
       </div>
       {numberError?.message && (
         <small
@@ -110,7 +113,7 @@ const PhoneInput: React.FC<Props> = (props) => {
             !value.length
               ? "hidden "
               : "" +
-                " w-full text-[red] capitalize text-xs text-right leading-none"
+                " w-full block text-[red] capitalize text-xs text-right leading-none"
           }
         >
           {numberError?.message.replaceAll("_", " ").toLowerCase()}

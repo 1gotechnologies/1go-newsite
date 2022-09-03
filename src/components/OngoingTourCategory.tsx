@@ -9,13 +9,16 @@ import { Btn } from "./Styled";
 const OngoingTourCategory: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
-  const [selected, setSelected] = useState<string>();
   const booking = useBookingStore();
+  const [selected, setSelected] = useState<string | undefined>(
+    booking?.category
+  );
   const next = () => {
     booking.category = selected;
     selected === "single" ? (booking.persons = 1) : (booking.persons = 2);
-    selected !== "multiple" ? props.setStep("visa") : props.setStep("persons");
-    console.log(booking);
+    selected !== "multiple"
+      ? props.setStep("documents")
+      : props.setStep("persons");
   };
   return (
     <div className=" flex flex-col gap-7 ">

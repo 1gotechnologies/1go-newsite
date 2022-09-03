@@ -71,7 +71,7 @@ export default function Register() {
                 "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8 " +
                   email.length && !checkEmail(email)
                   ? " focus:!border-b-[red] "
-                  : ""
+                  : " !border-[#d9d9d9]"
               }
               type={"email"}
               placeholder="Email"
@@ -100,6 +100,8 @@ export default function Register() {
             className="my-3 text-lg "
             number={phone}
             setNumber={setPhone}
+            border
+            style={{ number: " text-lg p-[0.5rem]" }}
           />
 
           {/* password */}
