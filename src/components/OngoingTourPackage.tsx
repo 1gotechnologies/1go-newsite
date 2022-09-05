@@ -55,25 +55,31 @@ const OngoingTourPackage: React.FC<{
           <label htmlFor="phoneNumber">
             <strong>Enter mobile number</strong>
           </label>
-          <PhoneInput
-            number={number}
-            setNumber={setNumber}
-            style={{
-              number: " !bg-[#e5e5e5] p-3 border-0 outline-none",
-              code: " !bg-[#e5e5e5] p-3 border-0 outline-none",
-            }}
-          />
+          {booking.persons &&
+            Array.from({ length: booking.persons }, (v, i) => i).map((el) => (
+              <PhoneInput
+                number={number}
+                setNumber={setNumber}
+                style={{
+                  number: " !bg-[#e5e5e5] p-3 border-0 outline-none",
+                  code: " !bg-[#e5e5e5] p-3 border-0 outline-none",
+                }}
+              />
+            ))}
         </div>
 
         <div className="flex flex-col gap-4">
           <label htmlFor="email">
             <strong>Enter email address</strong>
           </label>
-          <input
-            type={"email"}
-            className="bg-[#e5e5e5] p-3 border-0 outline-none"
-            placeholder="Email address"
-          />
+          {booking.persons &&
+            Array.from({ length: booking.persons }, (v, i) => i).map((el) => (
+              <input
+                type={"email"}
+                className="bg-[#e5e5e5] p-3 border-0 outline-none"
+                placeholder="Email address"
+              />
+            ))}
         </div>
       </div>
 
