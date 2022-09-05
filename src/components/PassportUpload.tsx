@@ -1,4 +1,10 @@
-import React, { FormEventHandler, useEffect, useRef, useState } from "react";
+import React, {
+  createRef,
+  FormEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Dropdown from "./Dropdown";
 import { Btn } from "./Styled";
 
@@ -7,8 +13,10 @@ const PassportUpload: React.FC<{
   setFile: (index: number, val: object) => any;
 }> = (props) => {
   const [fileName, setFileName] = useState<string>();
+  const [value, setValue] = useState<File>();
   const [show, setShow] = useState(false);
-  const fileInput = useRef<HTMLInputElement>();
+  const fileInput = createRef<HTMLInputElement>();
+
   const getFileName = () => {
     if (fileInput.current?.files) setFileName(fileInput.current.files[0].name);
     setShow(false);
@@ -49,8 +57,8 @@ const PassportUpload: React.FC<{
                 name={`passport-${props.index}-select`}
                 id={`passport-${props.index}-select`}
                 accept="image/*"
-                hidden
                 ref={fileInput}
+                hidden
                 onChange={getFileName}
               />
             </div>
