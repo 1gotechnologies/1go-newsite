@@ -1,3 +1,3 @@
-Sitemap: http://www.1goexplore.com/sitemap.xml
+Sitemap: https://www.travas.io/sitemap.xml
 User-agent: *
 Disallow: 
