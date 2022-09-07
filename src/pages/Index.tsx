@@ -12,17 +12,19 @@ import OngoingTourIndex from "../components/OngoingTourIndex";
 import BucketListIndex from "../components/BucketListIndex";
 import OngoingTourProcess from "../components/OngoingTourProcess";
 import UpcomingTour from "./UpcomingTour";
+import useAuthStore from "../stores/auth";
 
 const Index = () => {
-  const [title, setTitle] = useState("1go Admin Panel");
   const [auth, setAuth] = useState(true);
   const location = useLocation();
+  const tokens = useAuthStore();
 
   useEffect(() => {
-    // setAuth(localStorage.getItem("x_key") ? true : false);
-    document.title = title;
+    // tokens.getToken();
+    // setAuth(tokens.accessToken ? true : false);
   }, [location]);
 
+  // forgotten-password
   return (
     <Routes>
       <Route path="" element={auth ? <Home /> : <Navigate to={"/login"} />} />
@@ -74,14 +76,16 @@ const Index = () => {
         <Route path="add" element={<BucketListAdd />} />
       </Route>
 
+      <Route path="login" element={!auth ? <Login /> : <Navigate to={"/"} />} />
+
       <Route
-        path="login"
-        element={/*!auth ?*/ <Login /> /* : <Navigate to={"/"} />*/}
+        path="forgotten-password"
+        element={!auth ? <Login /> : <Navigate to={"/"} />}
       />
 
       <Route
         path="register"
-        element={/*!auth ?*/ <Register /> /* : <Navigate to={"/"} />*/}
+        element={!auth ? <Register /> : <Navigate to={"/"} />}
       />
     </Routes>
   );

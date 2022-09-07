@@ -7,6 +7,7 @@ interface BookingState {
   package?: string;
   visa?: string[];
   persons?: number;
+  startPayment?: boolean;
 }
 
 const useBookingStore = create<BookingState>((set) => ({
@@ -16,6 +17,7 @@ const useBookingStore = create<BookingState>((set) => ({
   category: "",
   package: "",
   visa: [],
+  startPayment: false,
 }));
 
 export default useBookingStore;

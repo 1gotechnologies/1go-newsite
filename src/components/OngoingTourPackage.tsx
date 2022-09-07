@@ -64,6 +64,7 @@ const OngoingTourPackage: React.FC<{
                   number: " !bg-[#e5e5e5] p-3 border-0 outline-none",
                   code: " !bg-[#e5e5e5] p-3 border-0 outline-none",
                 }}
+                key={el}
               />
             ))}
         </div>
@@ -78,6 +79,7 @@ const OngoingTourPackage: React.FC<{
                 type={"email"}
                 className="bg-[#e5e5e5] p-3 border-0 outline-none"
                 placeholder="Email address"
+                key={el}
               />
             ))}
         </div>

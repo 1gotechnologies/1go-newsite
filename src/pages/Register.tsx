@@ -29,7 +29,7 @@ export default function Register() {
   };
 
   return (
-    <MainLayout auth>
+    <MainLayout auth title="Register">
       <form
         onSubmit={register}
         className="w-full relative min-h-full flex flex-wrap items-end md:items-center justify-around gap-7 md:gap-2 md:p-10"
@@ -67,12 +67,12 @@ export default function Register() {
           {/* email */}
           <div className="my-3 flex flex-wrap">
             <Input
-              className={
-                "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8 " +
-                  email.length && !checkEmail(email)
-                  ? " focus:!border-b-[red] "
-                  : " !border-[#d9d9d9]"
-              }
+              className={`my-3  text-lg !pr-8 
+                 ${
+                   email.length && !checkEmail(email)
+                     ? " focus:!border-b-[red] "
+                     : " focus:!border-b-[#1F66D0]"
+                 }`}
               type={"email"}
               placeholder="Email"
               value={email}
@@ -107,12 +107,11 @@ export default function Register() {
           {/* password */}
           <div className="flex items-center">
             <Input
-              className={
-                "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8 " +
-                  password.length && !checkPassword(password)
+              className={`my-3 text-lg !pr-8 ${
+                password.length && !checkPassword(password)
                   ? " focus:!border-b-[red] "
-                  : ""
-              }
+                  : " focus:!border-b-[#1F66D0]"
+              }`}
               type={!showPwd ? "password" : ""}
               placeholder="Password"
               value={password}
@@ -173,13 +172,12 @@ export default function Register() {
           {/* password confirmation */}
           <div className="flex items-center flex-wrap">
             <Input
-              className={
-                "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8" +
-                  passwordConfrim.length &&
+              className={`my-3 text-lg !pr-8 ${
+                passwordConfrim.length &&
                 !matchPassword(password, passwordConfrim)
                   ? " focus:!border-b-[red] "
-                  : ""
-              }
+                  : " focus:!border-b-[#1F66D0] "
+              }`}
               type={!showPwd ? "password" : ""}
               placeholder="Re-type Password"
               value={passwordConfrim}
@@ -214,7 +212,7 @@ export default function Register() {
             By registering, I agree to the Privacy policy and Terms of use
           </small>
           <div className="grow " />
-          <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full rounded-full">
+          <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-50 w-full rounded-full">
             Register
           </Btn>
 

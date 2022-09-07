@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const UpcomingTour = () => {
   return (
-    <MainLayout>
+    <MainLayout title="Upcoming Tour">
       <section className="container px-3 pb-10">
         <Outlet />
       </section>

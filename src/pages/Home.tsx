@@ -21,7 +21,7 @@ export default function Home() {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title="dashboard">
       <div className="flex flex-col gap-10">
         {/* ungoing tour */}
         <section>
@@ -38,7 +38,10 @@ export default function Home() {
           >
             <div className="bg-slate-900 absolute bg-opacity-20 w-full h-full top-0 left-0 p-5 flex flex-col justify-end text-left">
               <div className="flex justify-between items-center w-full">
-                <h5 className="text-[white] max-w-[80%] md:max-w-[60%] font-medium truncate max-h-[75px]">
+                <h5
+                  className="text-[white] max-w-[80%] md:max-w-[60%] font-medium truncate max-h-[75px]"
+                  title="Experience the 2022 world cup and the beauty of Qatar"
+                >
                   Experience the 2022 world cup and the beauty of Qatar
                 </h5>
                 <HiChevronRight fontSize={"1.8rem"} className="text-[white]" />

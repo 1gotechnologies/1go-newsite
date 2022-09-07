@@ -9,16 +9,14 @@ import { Btn } from "./Styled";
 const OngoingTourPassport: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
-  const [visas, setVisas] = useState<object[]>();
-  const [visasComplete, setVisasComplete] = useState(false);
   const booking = useBookingStore();
+  const [visas, setVisas] = useState<string[] | Blob[]>(booking.visa ?? []);
+  const [visasComplete, setVisasComplete] = useState(false);
   const persons = useRef(booking.persons);
-  const setFile = (index: number, val: object) => {
-    const files = visas ?? [];
-    files[index] = [val];
-    console.log({ visas });
+  const setFile = (index: number, val: string | Blob) => {
+    const files = visas;
+    files[index] = val;
     setVisas(files);
-    console.log({ visas });
     setVisasComplete(visas?.length === persons.current);
   };
   return (

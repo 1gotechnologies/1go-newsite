@@ -17,7 +17,7 @@ interface User {
 const Profile = () => {
   const user: User = {};
   return (
-    <MainLayout>
+    <MainLayout title="Profile">
       <section className=" container max-w-screen-md flex flex-col gap-6 px-5">
         <div className=" flex justify-between items-center mx-auto w-full md:max-w-screen-sm">
           <span>Number of booked tours:</span>

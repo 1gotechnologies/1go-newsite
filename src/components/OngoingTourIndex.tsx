@@ -4,6 +4,7 @@ import { faker } from "@faker-js/faker";
 import ImageCard from "./ImageCard";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { HiChevronRight } from "react-icons/hi";
+import SliderComponent from "./SliderComponent";
 
 const OngoingTourIndex = () => {
   const fact = faker.lorem.sentence();
@@ -28,30 +29,30 @@ const OngoingTourIndex = () => {
       {/* places */}
       <div className="">
         <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3 slide">
+        <SliderComponent>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
-            <div className="w-full md:w-[45%] grow" key={index}>
+            <div className="w-full md:w-[45%] grow select-none" key={index}>
               <ImageCard
                 title={faker.address.city()}
                 caption={faker.lorem.sentence()}
               />
             </div>
           ))}
-        </div>
+        </SliderComponent>
       </div>
       {/* foods */}
       <div className="">
         <h5 className="pb-4">Places to visit in {tourLocation}</h5>
-        <div className="flex overflow-x-auto gap-3 md:gap-6 pb-3 slide">
+        <SliderComponent>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, "ui"].map((el, index) => (
-            <div className="w-full md:w-[45%] grow" key={index}>
+            <div className="w-full md:w-[45%] grow select-none" key={index}>
               <ImageCard
                 title={faker.address.city()}
                 caption={faker.lorem.sentence()}
               />
             </div>
           ))}
-        </div>
+        </SliderComponent>
       </div>
       {/* continue to select agent */}
       <div className="max-w-screen-sm w-full self-center">

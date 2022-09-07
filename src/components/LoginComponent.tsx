@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Btn, Input } from "../components/Styled";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { checkEmail, checkPassword } from "../utils/formValidation";
+import useAuthStore from "../stores/auth";
 
 const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,6 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
   const login: FormEventHandler = async (e) => {
     e.preventDefault();
     props.oncomplete();
-    console.log("login");
   };
 
   return (
@@ -21,7 +21,7 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
       className="w-full relative min-h-full flex flex-wrap items-end md:items-center justify-around gap-7 md:gap-2 md:p-10"
       onSubmit={login}
     >
-      <div className="container md:w-[35%] text-center md:text-left flex flex-col gap-6 grow">
+      <div className="container md:w-[35%] text-center md:text-left flex flex-col gap-6 grow self-start md:py-[5rem]">
         <h4 className="text-[32px] md:text-3xl lg:text-4xl md:font-bold">
           Login
         </h4>
@@ -30,12 +30,12 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
         {/* email */}
         <div className="my-3 flex flex-wrap">
           <Input
-            className={
-              "my-3 focus:!border-b-[#1F66D0] text-lg !pr-8 " + email.length &&
-              !checkEmail(email)
-                ? " focus:!border-b-[red] "
-                : ""
-            }
+            className={`
+              my-3 text-lg !pr-8   ${
+                email.length && !checkEmail(email)
+                  ? " focus:!border-b-[red] "
+                  : " focus:!border-b-[#1F66D0] "
+              }`}
             type={"email"}
             placeholder="Email"
             value={email}
@@ -59,7 +59,11 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
         {/* password */}
         <div className="flex items-center flex-wrap">
           <Input
-            className="my-3 focus:!border-b-[#1F66D0] text-lg !pr-8"
+            className={`my-3 text-lg !pr-8 ${
+              password.length && !checkPassword(password)
+                ? " focus:!border-[red]"
+                : " focus:!border-b-[#1F66D0]"
+            }`}
             type={!showPwd ? "password" : ""}
             placeholder="Password"
             value={password}
@@ -90,7 +94,7 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
           )}
         </div>
         <div className="grow min-h-[50px]" />
-        <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-20 w-full rounded-full">
+        <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-50 w-full rounded-full">
           Login
         </Btn>
 

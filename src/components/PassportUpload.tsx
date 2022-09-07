@@ -10,7 +10,7 @@ import { Btn } from "./Styled";
 
 const PassportUpload: React.FC<{
   index: number;
-  setFile: (index: number, val: object) => any;
+  setFile: (index: number, val: string | Blob) => any;
 }> = (props) => {
   const [fileName, setFileName] = useState<string>();
   const [value, setValue] = useState<File>();
@@ -24,13 +24,14 @@ const PassportUpload: React.FC<{
 
   const upload: FormEventHandler = (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    if (fileInput.current?.files)
-      props.setFile(props.index, fileInput.current.files[0]);
+    props.setFile(
+      props.index,
+      fileInput.current?.files ? fileInput.current?.files[0] : ""
+    );
   };
 
   return (
-    <form onSubmit={upload} className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3">
       <Dropdown
         show={show}
         setShow={setShow}
@@ -70,12 +71,12 @@ const PassportUpload: React.FC<{
         <Btn
           className="w-[170px] bg-[#1F66D0] text-white font-semibold !py-3 self-center my-3"
           onClick={upload}
-          type="submit"
+          type="button"
         >
           Upload
         </Btn>
       </div>
-    </form>
+    </div>
   );
 };
 
