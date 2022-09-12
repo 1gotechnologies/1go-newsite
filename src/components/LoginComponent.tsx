@@ -13,7 +13,7 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<string[] | string | unknown>();
+  const [errors, setErrors] = useState<string[] | string | object>();
 
   const submit: FormEventHandler = async (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
         </h4>
       </div>
       <div className="grow w-full md:w-[50%] lg:w-[60%] min-h-[50%] flex md:border-[#ccc] border-0 md:border-l-2 md:pl-10 container flex-col justify-between gap-5 md:py-5">
-        {errors ? (
+        {errors !== undefined ? (
           <div className="w-full grow text-[red]">{errors.toString()}</div>
         ) : (
           ""
