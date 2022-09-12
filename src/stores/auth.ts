@@ -1,4 +1,5 @@
 import create from "zustand";
+import * as Crypto from "crypto-js";
 
 interface Tokens {
   accessToken?: string;
@@ -10,13 +11,13 @@ interface AuthState extends Tokens {
   setToken: (tokens: Tokens) => void;
 }
 
-const encryptToken = (token: string) => {
-  return token;
-};
+const encryptToken = (token: string) =>
+  Crypto.AES.encrypt(token, import.meta.env.VITE_Enc_Key ?? "  ").toString();
 
-const decryptToken = (token: string) => {
-  return token;
-};
+const decryptToken = (token: string) =>
+  Crypto.AES.decrypt(token, import.meta.env.VITE_Enc_Key ?? "  ").toString(
+    Crypto.enc.Utf8
+  );
 
 const useAuthStore = create<AuthState>((set) => ({
   accessToken: "",
