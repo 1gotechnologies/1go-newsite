@@ -1,9 +1,11 @@
 import { FormEventHandler, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "../components/PhoneInput";
 import { Btn, Input } from "../components/Styled";
 import MainLayout from "../layout/MainLayout";
+import useAuthStore from "../stores/auth";
+import { backend } from "../utils/apis";
 import {
   checkEmail,
   checkPassword,
@@ -20,12 +22,49 @@ export default function Register() {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfrim, setPasswordConfrim] = useState("");
+  const [password2, setPassword2] = useState("");
   const [showPwd, setShowPwd] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<string[] | string | any>();
+
+  const navigate = useNavigate();
 
   const register: FormEventHandler = async (e) => {
     e.preventDefault();
-    if (checkPassword(password)) console.log("register");
+    const auth = useAuthStore();
+    if (checkPassword(password)) {
+      setLoading(true);
+      console.log({ loading });
+      const jsonData = JSON.stringify({
+        email,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+        password2,
+        phone_number: phone,
+      });
+      try {
+        const response = await fetch(`${backend}/auth/login`, {
+          method: "POST",
+          body: jsonData,
+          headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            mode: "cors",
+          },
+        });
+        const res = await response.json();
+        if (response.status === 201) {
+          return navigate("/login");
+        }
+        setErrors(res?.detail);
+      } catch (error) {
+        setErrors("Error Connecting to Server");
+      }
+
+      setLoading(false);
+      console.log({ loading });
+    }
   };
 
   return (
@@ -40,6 +79,11 @@ export default function Register() {
           </h4>
         </div>
         <div className="grow w-full lg:w-[60%] min-h-[50%] flex lg:border-[#ccc] border-0 lg:border-l-2 lg:pl-10 container flex-col justify-between gap-5 md:py-5">
+          {errors ? (
+            <div className="w-full grow text-[red]">{errors.toString()}</div>
+          ) : (
+            ""
+          )}
           {/* name */}
           <div className="flex gap-4 w-full">
             <div className="w-[0.8/2] grow">
@@ -173,16 +217,15 @@ export default function Register() {
           <div className="flex items-center flex-wrap">
             <Input
               className={`my-3 text-lg !pr-8 ${
-                passwordConfrim.length &&
-                !matchPassword(password, passwordConfrim)
+                password2.length && !matchPassword(password, password2)
                   ? " focus:!border-b-[red] "
                   : " focus:!border-b-[#1F66D0] "
               }`}
               type={!showPwd ? "password" : ""}
               placeholder="Re-type Password"
-              value={passwordConfrim}
+              value={password2}
               onChange={(e) => {
-                setPasswordConfrim(e.target.value);
+                setPassword2(e.target.value);
               }}
             />
             <Btn
@@ -194,10 +237,10 @@ export default function Register() {
               {showPwd && <VscEyeClosed size={"24px"} className="opacity-50" />}
             </Btn>
 
-            {!matchPassword(password, passwordConfrim) && (
+            {!matchPassword(password, password2) && (
               <small
                 className={
-                  !passwordConfrim.length
+                  !password2.length
                     ? "hidden "
                     : "" +
                       " w-full text-[red] capitalize text-right leading-none"

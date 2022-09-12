@@ -20,8 +20,8 @@ const Index = () => {
   const tokens = useAuthStore();
 
   useEffect(() => {
-    // tokens.getToken();
-    // setAuth(tokens.accessToken ? true : false);
+    tokens.getToken();
+    setAuth(tokens.accessToken ? true : false);
   }, [location]);
 
   // forgotten-password

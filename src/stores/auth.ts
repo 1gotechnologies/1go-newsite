@@ -1,5 +1,4 @@
 import create from "zustand";
-import { backend } from "../utils/apis";
 
 interface Tokens {
   accessToken?: string;

@@ -29,7 +29,7 @@ const checkPasswordNumberSymbol = (password: string) => {
 
 const checkEmail = (email: string) => {
   const emailFormat =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9]*$/gi;
+    /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9]{2,}/gi;
 
   return emailFormat.test(email);
 };

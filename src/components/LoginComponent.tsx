@@ -1,25 +1,55 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Btn, Input } from "../components/Styled";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { checkEmail, checkPassword } from "../utils/formValidation";
+
 import useAuthStore from "../stores/auth";
+import { backend } from "../utils/apis";
 
 const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
+  const auth = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<string[] | string | unknown>();
 
-  // password should be atleast 8 character long, 1 uppercase, 1 lowercase, 1 number
-  const login: FormEventHandler = async (e) => {
+  const submit: FormEventHandler = async (e) => {
     e.preventDefault();
-    props.oncomplete();
+    setLoading(true);
+    setErrors(undefined);
+    const jsonData = JSON.stringify({ email, password });
+    try {
+      const response = await fetch(`${backend}auth/login`, {
+        method: "POST",
+        body: jsonData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const res = await response.json();
+      if (response.ok) {
+        const tokens = res;
+        auth.setToken({
+          refreshToken: tokens?.refresh,
+          accessToken: tokens?.access,
+        });
+        return props.oncomplete();
+      }
+      setErrors(res?.detail);
+    } catch (error) {
+      console.log({ error });
+      setErrors("Error Connecting to Server");
+    }
+
+    setLoading(false);
   };
 
   return (
     <form
       className="w-full relative min-h-full flex flex-wrap items-end md:items-center justify-around gap-7 md:gap-2 md:p-10"
-      onSubmit={login}
+      onSubmit={submit}
     >
       <div className="container md:w-[35%] text-center md:text-left flex flex-col gap-6 grow self-start md:py-[5rem]">
         <h4 className="text-[32px] md:text-3xl lg:text-4xl md:font-bold">
@@ -27,6 +57,11 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
         </h4>
       </div>
       <div className="grow w-full md:w-[50%] lg:w-[60%] min-h-[50%] flex md:border-[#ccc] border-0 md:border-l-2 md:pl-10 container flex-col justify-between gap-5 md:py-5">
+        {errors ? (
+          <div className="w-full grow text-[red]">{errors.toString()}</div>
+        ) : (
+          ""
+        )}
         {/* email */}
         <div className="my-3 flex flex-wrap">
           <Input
@@ -94,7 +129,12 @@ const LoginComponent: React.FC<{ oncomplete: () => any }> = (props) => {
           )}
         </div>
         <div className="grow min-h-[50px]" />
-        <Btn className="bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-50 w-full rounded-full">
+        <Btn
+          className={`bg-blue-700 text-white font-semibold !py-4 transition-all duration-500 shadow-lg shadow-slate-300 hover:bg-opacity-50 w-full rounded-full ${
+            loading ? "bg-opacity-60" : ""
+          }`}
+          disabled={loading ?? undefined}
+        >
           Login
         </Btn>
 

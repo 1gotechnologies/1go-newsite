@@ -13,6 +13,8 @@ dist
 dist-ssr
 *.local
 
+explore.postman_collection.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

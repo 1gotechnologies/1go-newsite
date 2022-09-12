@@ -1,0 +1,8 @@
+auth
+    login
+    register
+    rfreshtoken
+tour
+    book
+    request
+    pay
