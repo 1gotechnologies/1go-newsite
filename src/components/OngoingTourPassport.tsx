@@ -10,9 +10,11 @@ const OngoingTourPassport: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
   const booking = useBookingStore();
-  const [visas, setVisas] = useState<string[] | Blob[]>(booking.visa ?? []);
+  const [visas, setVisas] = useState<string[] | string[] | Blob[]>(
+    booking.passports ?? []
+  );
   const [visasComplete, setVisasComplete] = useState(false);
-  const persons = useRef(booking.persons);
+  const persons = useRef(booking.individuals);
   const setFile = (index: number, val: string | Blob) => {
     const files = visas;
     files[index] = val;

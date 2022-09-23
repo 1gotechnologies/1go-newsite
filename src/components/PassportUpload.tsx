@@ -13,6 +13,7 @@ const PassportUpload: React.FC<{
   setFile: (index: number, val: string | Blob) => any;
 }> = (props) => {
   const [fileName, setFileName] = useState<string>();
+  const [uploading, setUploading] = useState<"doing" | "done">();
   const [value, setValue] = useState<File>();
   const [show, setShow] = useState(false);
   const fileInput = createRef<HTMLInputElement>();
@@ -24,10 +25,14 @@ const PassportUpload: React.FC<{
 
   const upload: FormEventHandler = (e) => {
     e.preventDefault();
+    setUploading("doing");
     props.setFile(
       props.index,
       fileInput.current?.files ? fileInput.current?.files[0] : ""
     );
+    setUploading("done");
+
+    // alert(`${fileName ?? "International passsport 1"} Uploaded Successfully`);
   };
 
   return (
@@ -69,11 +74,11 @@ const PassportUpload: React.FC<{
 
       <div className=" text-right">
         <Btn
-          className="w-[170px] bg-[#1F66D0] text-white font-semibold !py-3 self-center my-3"
+          className={`w-[170px] bg-[#1F66D0] text-white font-semibold !py-3 self-center my-3`}
           onClick={upload}
           type="button"
         >
-          Upload
+          {uploading === "doing" ? "Uploading" : "Upload"}
         </Btn>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { MdCheckCircle } from "react-icons/md";
 
 const RadioSelect: React.FC<{
   value: string | number;
+  label?: string | number;
   selected: boolean;
   select: () => any;
 }> = (props) => {
@@ -11,7 +12,9 @@ const RadioSelect: React.FC<{
       className="border-[#ccc] border-y p-3 flex justify-between bg-white shadow-sm cursor-pointer"
       onClick={props.select}
     >
-      <div className="font-normal capitalize grow">{props.value}</div>
+      <div className="font-normal capitalize grow">
+        {props.label ?? props.value}
+      </div>
       <div
         className={`rounded-full !w-[35px] !h-[35px] border-[#ACAAAA] relative p-0 transition-all flex items-center justify-center duration-300 ${
           props.selected ? "  " : " border-2 "

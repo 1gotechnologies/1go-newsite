@@ -33,7 +33,7 @@ const SliderComponent: React.FC<{
 
   return (
     <div
-      className={`flex overflow-x-auto gap-3 md:gap-6 py-3 ${
+      className={`flex overflow-x-auto gap-3 md:gap-6 py-3 slider ${
         isDown ? " cursor-grabbing" : " cursor-grab"
       }`}
       ref={slider}

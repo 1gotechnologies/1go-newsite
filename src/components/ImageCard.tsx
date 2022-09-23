@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 interface Props {
   image?: string;
   title?: string;
-  link?: string;
   caption?: string;
 }
 
@@ -29,11 +28,6 @@ const SummaryCard: React.FC<Props> = (props) => {
           {props.caption}
         </p>
       </div>
-
-      <Link
-        to={props.link ?? "/"}
-        className="absolute w-full h-full top-0 left-0"
-      />
     </div>
   );
 };

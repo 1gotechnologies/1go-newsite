@@ -8,6 +8,7 @@ import OngoingTourMultiplePersons from "./OngoingTourMultiplePersons";
 import useBookingStore from "../stores/booking";
 import OngoingTourPassport from "./OngoingTourPassport";
 import OngoingTourPackage from "./OngoingTourPackage";
+import OngoingTourSummary from "./OngoingTourSummary";
 
 const OngoingTourProcess = () => {
   const [step, setStep] = useState<string>("start");
@@ -17,18 +18,18 @@ const OngoingTourProcess = () => {
   const backOne = () => {
     step === "category"
       ? setStep("start")
-      : step === "documents" && booking.category !== "multiple"
+      : step === "documents" && booking.category?.toLowerCase() !== "m"
       ? setStep("category")
-      : step === "documents" && booking.category === "multiple"
+      : step === "documents" && booking.category?.toLowerCase() === "m"
       ? setStep("persons")
       : step === "persons"
       ? setStep("category")
       : step === "packages"
       ? setStep("documents")
-      : step === "preview"
+      : step === "summary"
       ? setStep("packages")
       : step === "finish"
-      ? setStep("preview")
+      ? setStep("summary")
       : navigate(-1);
   };
   const goBack = () => {
@@ -65,8 +66,8 @@ const OngoingTourProcess = () => {
         <OngoingTourPassport setStep={setStep} />
       ) : step === "packages" ? (
         <OngoingTourPackage setStep={setStep} />
-      ) : step === "preview" ? (
-        <OngoingTourPackage setStep={setStep} />
+      ) : step === "summary" ? (
+        <OngoingTourSummary setStep={setStep} />
       ) : (
         ""
       )}

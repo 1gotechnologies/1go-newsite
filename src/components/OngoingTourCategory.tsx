@@ -10,15 +10,11 @@ const OngoingTourCategory: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
   const booking = useBookingStore();
-  const [selected, setSelected] = useState<string | undefined>(
-    booking?.category
-  );
+  const [selected, setSelected] = useState(booking?.category ?? "S");
   const next = () => {
     booking.category = selected;
-    selected === "single" ? (booking.persons = 1) : (booking.persons = 2);
-    selected !== "multiple"
-      ? props.setStep("documents")
-      : props.setStep("persons");
+    selected === "S" ? (booking.individuals = 1) : (booking.individuals = 2);
+    selected !== "M" ? props.setStep("documents") : props.setStep("persons");
   };
   return (
     <div className=" flex flex-col gap-7 ">
@@ -45,14 +41,24 @@ const OngoingTourCategory: React.FC<{
       </h1>
 
       <div className="flex flex-col gap-4">
-        {["single", "couple", "multiple"].map((el, index) => (
-          <RadioSelect
-            value={el}
-            selected={el === selected}
-            select={() => setSelected(el)}
-            key={index}
-          />
-        ))}
+        <RadioSelect
+          value={"S"}
+          label={"Single"}
+          selected={selected === "S"}
+          select={() => setSelected("S")}
+        />
+        <RadioSelect
+          value={"C"}
+          label={"Couple"}
+          selected={selected === "C"}
+          select={() => setSelected("C")}
+        />
+        <RadioSelect
+          value={"M"}
+          label={"Multiple"}
+          selected={selected === "M"}
+          select={() => setSelected("M")}
+        />
       </div>
 
       {/* continue to select agent */}

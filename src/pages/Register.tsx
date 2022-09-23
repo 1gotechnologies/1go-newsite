@@ -48,7 +48,6 @@ export default function Register() {
           method: "POST",
           body: jsonData,
           headers: {
-            Accept: "*/*",
             "Content-Type": "application/json",
             mode: "cors",
           },
@@ -59,6 +58,7 @@ export default function Register() {
         }
         setErrors(res?.detail);
       } catch (error) {
+        console.log({ error });
         setErrors("Error Connecting to Server");
       }
 

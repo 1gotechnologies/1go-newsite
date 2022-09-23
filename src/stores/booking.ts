@@ -3,20 +3,20 @@ import create from "zustand";
 interface BookingState {
   tourId?: string;
   agentId?: string;
-  category?: string;
+  category?: "S" | "C" | "M";
   package?: string;
-  visa?: string[];
-  persons?: number;
+  passports?: File[];
+  individuals?: number;
   startPayment?: boolean;
 }
 
 const useBookingStore = create<BookingState>((set) => ({
   tourId: "",
   agentId: "",
-  persons: 1,
-  category: "",
+  individuals: 1,
+  category: "S",
   package: "",
-  visa: [],
+  passports: [],
   startPayment: false,
 }));
 

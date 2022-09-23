@@ -10,9 +10,11 @@ const OngoingTourCategory: React.FC<{
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }> = (props) => {
   const booking = useBookingStore();
-  const [selected, setSelected] = useState<number | undefined>(booking.persons);
+  const [selected, setSelected] = useState<number | undefined>(
+    booking.individuals
+  );
   const next = () => {
-    booking.persons = selected;
+    booking.individuals = selected;
     props.setStep("documents");
   };
   return (

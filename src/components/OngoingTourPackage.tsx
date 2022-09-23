@@ -55,33 +55,37 @@ const OngoingTourPackage: React.FC<{
           <label htmlFor="phoneNumber">
             <strong>Enter mobile number</strong>
           </label>
-          {booking.persons &&
-            Array.from({ length: booking.persons }, (v, i) => i).map((el) => (
-              <PhoneInput
-                number={number}
-                setNumber={setNumber}
-                style={{
-                  number: " !bg-[#e5e5e5] p-3 border-0 outline-none",
-                  code: " !bg-[#e5e5e5] p-3 border-0 outline-none",
-                }}
-                key={el}
-              />
-            ))}
+          {booking.individuals &&
+            Array.from({ length: booking.individuals }, (v, i) => i).map(
+              (el) => (
+                <PhoneInput
+                  number={number}
+                  setNumber={setNumber}
+                  style={{
+                    number: " !bg-[#e5e5e5] p-3 border-0 outline-none",
+                    code: " !bg-[#e5e5e5] p-3 border-0 outline-none",
+                  }}
+                  key={el}
+                />
+              )
+            )}
         </div>
 
         <div className="flex flex-col gap-4">
           <label htmlFor="email">
             <strong>Enter email address</strong>
           </label>
-          {booking.persons &&
-            Array.from({ length: booking.persons }, (v, i) => i).map((el) => (
-              <input
-                type={"email"}
-                className="bg-[#e5e5e5] p-3 border-0 outline-none"
-                placeholder="Email address"
-                key={el}
-              />
-            ))}
+          {booking.individuals &&
+            Array.from({ length: booking.individuals }, (v, i) => i).map(
+              (el) => (
+                <input
+                  type={"email"}
+                  className="bg-[#e5e5e5] p-3 border-0 outline-none"
+                  placeholder="Email address"
+                  key={el}
+                />
+              )
+            )}
         </div>
       </div>
 
@@ -94,15 +98,24 @@ const OngoingTourPackage: React.FC<{
           Select a type of package
         </h1>
       </div>
-      {["regular", "VIP"].map((item, index) => (
-        <RadioSelect
-          value={item}
-          key={index}
-          selected={tourPackage === item}
-          select={() => setTourPackage(item)}
-        />
-      ))}
-
+      <div className="flex flex-col gap-5 md:gap-10">
+        {["regular", "VIP"].map((item, index) => (
+          <div className="flex flex-col gap-2">
+            <RadioSelect
+              value={item}
+              key={index}
+              selected={tourPackage === item}
+              select={() => setTourPackage(item)}
+            />
+            <div className="flex flex-col gap-2 px-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
+              impedit enim nemo est corrupti adipisci, excepturi temporibus
+              debitis similique nobis corporis eligendi a omnis culpa deserunt
+              eveniet earum fuga officia?
+            </div>
+          </div>
+        ))}
+      </div>
       {/* continue to select agent */}
       <div className="max-w-screen-sm w-full self-center pt-20">
         <Btn
@@ -111,7 +124,7 @@ const OngoingTourPackage: React.FC<{
             // number.length && email ? " bg-[#1F66D0] " : "bg-[#c4c4c4]"
           }`}
           type="button"
-          onClick={() => props.setStep("preview")}
+          onClick={() => props.setStep("summary")}
           // disabled={!number.length || !email}
         >
           <span className="text-lg font-semibold">Continue</span>

@@ -64,6 +64,7 @@ const AvailableAgentCard: React.FC<Props> = (props) => {
         <Link
           to={`/operator/${props.id}/info`}
           className="text-right font-medium text-[#1F66D0] w-full"
+          target={"_blank"}
         >
           View Portfolio
         </Link>

@@ -21,7 +21,10 @@ const OngoingTourAgent: React.FC<{
       </h1>
 
       <div className="flex flex-wrap gap-3 justify-around">
-        {[1, 2, 3, 4, 5, 6, 7].map((el) => (
+        {Array.from(
+          { length: Number(faker.random.numeric()) },
+          (v, k) => k
+        ).map((el) => (
           <div className=" w-[95%] sm:w-[48%] lg:w-[30%]" key={el}>
             <AvailableAgentCard
               package={faker.lorem.sentence()}
