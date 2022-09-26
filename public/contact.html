@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <title>travas | Become an explorer, explore the world - travas.io</title>
-        <meta property="og:title" content="travas | Become an explorer, explore the world - travas.io">
-        <meta name="twitter:title" content="travas | Become an explorer, explore the world - travas.io">
+        <title>Travas | Become an explorer, explore the world - travas.io</title>
+        <meta property="og:title" content="Travas | Become an explorer, explore the world - travas.io">
+        <meta name="twitter:title" content="Travas | Become an explorer, explore the world - travas.io">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="travas - Become an explorer, explore the world. Experience the 2022 World Cup and the Beauty of Qatar. We help ordinary people explore the world better.">
@@ -29,6 +29,20 @@
         <script src="https://kit.fontawesome.com/5e43348ada.js" crossorigin="anonymous"></script>
     </head>
     <body class="font-mont pt-[60px] lg:pt-[70px] text-slate-800 overflow-x-hidden">
+        <!--Cookie banner-->
+        <div id="banner" style="display: none;" class="cookie-banner w-[100%] bg-slate-50 shadow-lg rounded-lg font-[700] fixed bottom-[0px] left-[0] py-[20px] px-[15px] md:px-[60px] block md:flex items-center justify-between z-[999]" >
+            <p>
+                By using our website, you agree to our 
+                <a href="privacy.html" class="text-blue-600">cookie policy</a>
+            </p>
+            <button 
+                id="close-banner" 
+                onclick="acceptCookieConsent();"
+                class="close bg-white border-[2px] my-[20px] md:my-0 float-right md:float-none border-blue-600 text-blue-600 font-[700] px-[20px] py-[8px] rounded-md text-[1rem] hover:bg-blue-600 hover:text-white hover:translate-y-1 transition ease-in-out duration-300"
+                >Accept & Close
+            </button>
+        </div>
+    <!--Cookie banner-->
         <!--header-->
         <header class="w-[100vw] h-[60px] lg:h-[70px] bg-white px-[20px] lg:px-[80px] flex items-center text-slate-800 shadow-md fixed top-0 z-[999]">
             <div class="w-full lg:w-2/3 flex items-center">
